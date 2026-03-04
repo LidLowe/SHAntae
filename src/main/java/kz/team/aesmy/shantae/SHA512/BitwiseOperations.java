@@ -1,4 +1,4 @@
-package kz.team.aesmy.shantae.SHA;
+package kz.team.aesmy.shantae.SHA512;
 
 public class BitwiseOperations
 {
@@ -6,25 +6,25 @@ public class BitwiseOperations
      *  The right shift operation
      *  SHR^n(x) = x >> n
      */
-    private static int shr(int x, int n)
+    private static long shr(long x, long n)
     {
         return x >>> n;
     }
 
     /**
      *  The rotate right (circular right shift) operation
-     *  ROTR^n(x) = (x >> n) OR (x << w - n)
+     *  ROTR^n(x) = (x >> n) OR (x << 64 - n)
      */
-    private static int rotr(int x, int n)
+    private static long rotr(long x, long n)
     {
-        return (x >>> n) | (x << (32- n));
+        return (x >>> n) | (x << (64 - n));
     }
 
     /**
      *  Choose function
      *  Ch(x, y, z) = (x AND y) XOR (NOT x AND z)
      */
-    public static int ch(int x, int y, int z)
+    public static long ch(long x, long y, long z)
     {
         return (x & y) ^ (~x & z);
     }
@@ -33,7 +33,7 @@ public class BitwiseOperations
      *  Majority function
      *  Maj(x, y, z) = (x AND y) XOR (x AND z) XOR (y AND z)
      */
-    public static int maj(int x, int y, int z)
+    public static long maj(long x, long y, long z)
     {
         return (x & y) ^ (x & z) ^ (y & z);
     }
@@ -41,32 +41,32 @@ public class BitwiseOperations
     /**
      *  Σ₀(x) = ROTR²(x) XOR ROTR¹³(x) XOR ROTR²²(x)
      */
-    public static int bigSigma0(int x)
+    public static long bigSigma0(long x)
     {
-        return rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22);
+        return rotr(x, 28) ^ rotr(x, 34) ^ rotr(x, 39);
     }
 
     /**
      *  Σ₁(x) = ROTR⁶(x) XOR ROTR¹¹(x) XOR ROTR²⁵(x)
      */
-    public static int bigSigma1(int x)
+    public static long bigSigma1(long x)
     {
-        return rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25);
+        return rotr(x, 14) ^ rotr(x, 18) ^ rotr(x, 41);
     }
 
     /**
      *  σ₀(x) = ROTR⁷(x) XOR ROTR¹⁸(x) XOR SHR³(x)
      */
-    public static int smallSigma0(int x)
+    public static long smallSigma0(long x)
     {
-        return rotr(x, 7) ^ rotr(x, 18) ^ shr(x, 3);
+        return rotr(x, 1) ^ rotr(x, 8) ^ shr(x, 7);
     }
 
     /**
      *  σ₁(x) = ROTR¹⁷(x) XOR ROTR¹⁹(x) XOR SHR¹⁰(x)
      */
-    public static int smallSigma1(int x)
+    public static long smallSigma1(long x)
     {
-        return rotr(x, 17) ^ rotr(x, 19) ^ shr(x, 10);
+        return rotr(x, 19) ^ rotr(x, 61) ^ shr(x, 6);
     }
 }
