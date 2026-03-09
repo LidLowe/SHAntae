@@ -1,34 +1,81 @@
 package kz.team.aesmy.shantae.SHA512;
 
+import java.nio.charset.StandardCharsets;
+
+import static kz.team.aesmy.shantae.SHA512.BitwiseOperations.*;
+import static kz.team.aesmy.shantae.SHA512.Constants.*;
+
 public class SHA512
 {
-    private final String message;
-
-    public SHA512(String message)
+    public String hash(String message)
     {
-        this.message = message;
-    }
+        long[] padded = padding(message);
+        long[] h = H.clone();
 
-    public long[] padding()
-    {
-        byte[] msgBytes = message.getBytes(java.nio.charset.StandardCharsets.UTF_8);
-        int byteLen = msgBytes.length;
-
-        long bitLen = (long) byteLen * 8;
-
-        int totalBytes = ((byteLen + 16) / 128 + 1) * 128;
-
-        long[] paddedArray = new long[totalBytes / 8];
-
-        for (int i = 0; i < byteLen; i++)
+        for (int i = 0; i < padded.length; i += 16)
         {
-            paddedArray[i / 8] |= ((long) (msgBytes[i] & 0xFF)) << (56 - (i % 8) * 8);
+            long[] w = new long[80];
+            System.arraycopy(padded, i, w, 0, 16);
+
+            for (int t = 16; t < 80; t++)
+            {
+                w[t] = smallSigma1(w[t - 2]) + w[t - 7] + smallSigma0(w[t - 15]) + w[t - 16];
+            }
+
+            long a = h[0], b = h[1], c = h[2], d = h[3],
+                    e = h[4], f = h[5], g = h[6], hVal = h[7];
+
+            for (int t = 0; t < 80; t++)
+            {
+                long t1 = hVal + bigSigma1(e) + ch(e, f, g) + K[t] + w[t];
+                long t2 = bigSigma0(a) + maj(a, b, c);
+                hVal = g;
+                g = f;
+                f = e;
+                e = d + t1;
+                d = c;
+                c = b;
+                b = a;
+                a = t1 + t2;
+            }
+
+            h[0] += a; h[1] += b; h[2] += c; h[3] += d;
+            h[4] += e; h[5] += f; h[6] += g; h[7] += hVal;
         }
 
-        paddedArray[byteLen / 8] |= 0x80L << (56 - (byteLen % 8) * 8);
+        return toHexString(h);
+    }
 
-        paddedArray[paddedArray.length - 1] = bitLen;
+    private long[] padding(String message)
+    {
+        byte[] msgBytes = message.getBytes(StandardCharsets.UTF_8);
+        long bitLen = (long) msgBytes.length * 8;
 
-        return paddedArray;
+        int totalBytes = ((msgBytes.length + 17 + 127) / 128) * 128;
+        long[] padded = new long[totalBytes / 8];
+
+        for (int i = 0; i < msgBytes.length; i++)
+        {
+            padded[i / 8] |= (long)(msgBytes[i] & 0xFF) << (56 - (i % 8) * 8);
+        }
+
+        padded[msgBytes.length / 8] |= 0x80L << (56 - (msgBytes.length % 8) * 8);
+
+        padded[padded.length - 2] = 0L;
+        padded[padded.length - 1] = bitLen;
+
+        return padded;
+    }
+
+    private String toHexString(long[] hashArray)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for (long val : hashArray)
+        {
+            sb.append(String.format("%016x", val));
+        }
+
+        return sb.toString();
     }
 }

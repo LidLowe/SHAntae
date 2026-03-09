@@ -7,10 +7,10 @@ import static kz.team.aesmy.shantae.SHA256.Constants.*;
 
 public class SHA256
 {
-    public String update(String message)
+    public String hash(String message)
     {
         int[] padded = padding(message);
-        final int[] h = H;
+        int[] h = H.clone();
 
         for (int i = 0; i < padded.length; i += 16)
         {
@@ -49,7 +49,8 @@ public class SHA256
     {
         byte[] msgBytes = message.getBytes(StandardCharsets.UTF_8);
         long bitLen = (long) msgBytes.length * 8;
-        int totalBytes = ((msgBytes.length + 8) / 64 + 1) * 64;
+
+        int totalBytes = ((msgBytes.length + 9 + 63) / 64) * 64;
         int[] padded = new int[totalBytes / 4];
 
         for (int i = 0; i < msgBytes.length; i++)
@@ -58,6 +59,7 @@ public class SHA256
         }
 
         padded[msgBytes.length / 4] |= 0x80 << (24 - (msgBytes.length % 4) * 8);
+
         padded[padded.length - 2] = (int) (bitLen >>> 32);
         padded[padded.length - 1] = (int) bitLen;
 

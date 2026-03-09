@@ -2,7 +2,7 @@ package kz.team.aesmy.shantae.SHA512;
 
 public class Constants
 {
-    protected static final long[] K512 = {
+    protected static final long[] K = {
             0x428a2f98d728ae22L, 0x7137449123ef65cdL, 0xb5c0fbcfec4d3b2fL, 0xe9b5dba58189dbbcL,
             0x3956c25bf348b538L, 0x59f111f1b605d019L, 0x923f82a4af194f9bL, 0xab1c5ed5da6d8118L,
             0xd807aa98a3030242L, 0x12835b0145706fbeL, 0x243185be4ee4b28cL, 0x550c7dc3d5ffb4e2L,
@@ -25,7 +25,7 @@ public class Constants
             0x4cc5d4becb3e42b6L, 0x597f299cfc657e2aL, 0x5fcb6fab3ad6faecL, 0x6c44198c4a475817L
     };
 
-    protected static final long[] H512 = {
+    protected static final long[] H = {
             0x6a09e667f3bcc908L,
             0xbb67ae8584caa73bL,
             0x3c6ef372fe94f82bL,
