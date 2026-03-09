@@ -7,7 +7,7 @@ import static kz.team.aesmy.shantae.SHA512.Constants.*;
 
 public class SHA512
 {
-    public String hash(String message)
+    public static String hash(String message)
     {
         long[] padded = padding(message);
         long[] h = H.clone();
@@ -46,7 +46,7 @@ public class SHA512
         return toHexString(h);
     }
 
-    private long[] padding(String message)
+    private static long[] padding(String message)
     {
         byte[] msgBytes = message.getBytes(StandardCharsets.UTF_8);
         long bitLen = (long) msgBytes.length * 8;
@@ -67,7 +67,7 @@ public class SHA512
         return padded;
     }
 
-    private String toHexString(long[] hashArray)
+    private static String toHexString(long[] hashArray)
     {
         StringBuilder sb = new StringBuilder();
 

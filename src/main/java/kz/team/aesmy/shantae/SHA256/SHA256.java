@@ -7,7 +7,7 @@ import static kz.team.aesmy.shantae.SHA256.Constants.*;
 
 public class SHA256
 {
-    public String hash(String message)
+    public static String hash(String message)
     {
         int[] padded = padding(message);
         int[] h = H.clone();
@@ -45,7 +45,7 @@ public class SHA256
         return toHexString(h);
     }
 
-    private int[] padding(String message)
+    private static int[] padding(String message)
     {
         byte[] msgBytes = message.getBytes(StandardCharsets.UTF_8);
         long bitLen = (long) msgBytes.length * 8;
@@ -66,7 +66,7 @@ public class SHA256
         return padded;
     }
 
-    private String toHexString(int[] hashArray)
+    private static String toHexString(int[] hashArray)
     {
         StringBuilder sb = new StringBuilder();
 
