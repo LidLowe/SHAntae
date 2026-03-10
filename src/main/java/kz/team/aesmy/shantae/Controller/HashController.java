@@ -80,31 +80,10 @@ public class HashController
     private void onHash()
     {
         String text = inputArea.getText();
-       // if (text.isEmpty()) { showError("Input is empty."); return; }
-
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 
-        // SHA-512 — always straightforward
         outputArea512.setText(SHA512.hash(bytes));
-
-        // SHA-256 — educational mode if toggled
-        if (educationalBox.isSelected()) {
-            StringBuilder log = new StringBuilder();
-            log.append(String.format("%-6s  %-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-10s  %-10s%n",
-                    "Round", "a", "b", "c", "d", "e", "f", "g", "h"));
-
-            String hex256 = SHA256.hashEducational(bytes,
-                    (round, a, b, c, d, e, f, g, h) ->
-                            log.append(String.format(
-                                    "%-6d  %08x  %08x  %08x  %08x  %08x  %08x  %08x  %08x%n",
-                                    round, a, b, c, d, e, f, g, h)));
-
-            outputArea256.setText(hex256);
-            eduArea.setText(log.toString());
-        } else {
-            outputArea256.setText(SHA256.hash(bytes));
-            eduArea.clear();
-        }
+        outputArea256.setText(SHA256.hash(bytes));
     }
 
     @FXML
@@ -169,6 +148,7 @@ public class HashController
     {
         FileChooser chooser = new FileChooser();
         chooser.setTitle(title);
+
         return chooser.showOpenDialog(null);
     }
 

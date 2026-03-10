@@ -104,24 +104,6 @@
           <font><Font name="Fira Code Regular" size="12.0"/></font>
         </Label>
 
-        <!-- Educational mode toggle -->
-        <CheckBox fx:id="educationalBox"
-                  layoutX="18.0" layoutY="344.0"
-                  text="Educational mode (show SHA-256 round values)"
-                  mnemonicParsing="false"
-                  onAction="#onEducationalToggle">
-          <font><Font name="Fira Code Regular" size="12.0"/></font>
-        </CheckBox>
-
-        <!-- Educational output -->
-        <TextArea fx:id="eduArea"
-                  layoutX="18.0" layoutY="368.0"
-                  prefHeight="100.0" prefWidth="624.0"
-                  promptText="Round-by-round a, b, c, d, e, f, g, h will appear here"
-                  wrapText="true" editable="false" visible="false">
-          <font><Font name="Fira Code Regular" size="11.0"/></font>
-        </TextArea>
-
         <!-- Action buttons -->
         <Button layoutX="200.0" layoutY="400.0"
                 prefHeight="25.0" prefWidth="85.0"
