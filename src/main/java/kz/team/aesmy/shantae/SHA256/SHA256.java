@@ -21,14 +21,14 @@ public class SHA256
     public static String hash(byte[] messageBytes)
     {
         int[] padded = padding(messageBytes);
-        int[] digest = compress(padded, null);
+        int[] digest = compress(padded);
         return toHexString(digest);
     }
 
     public static byte[] hashBytes(byte[] messageBytes)
     {
         int[] padded = padding(messageBytes);
-        int[] digest = compress(padded, null);
+        int[] digest = compress(padded);
         return intsToBytes(digest);
     }
 
@@ -50,7 +50,7 @@ public class SHA256
         return padded;
     }
 
-    private static int[] compress(int[] padded, RoundObserver observer)
+    private static int[] compress(int[] padded)
     {
         int[] h = H.clone();
 
@@ -126,15 +126,5 @@ public class SHA256
         }
 
         return bytes;
-    }
-
-    @FunctionalInterface
-    public interface RoundObserver {
-        void observer(int round, int a, int b, int c, int d, int e, int f, int g, int h);
-    }
-
-    public static String hashEducational(byte[] messageBytes, RoundObserver observer)
-    {
-        return toHexString(compress(padding(messageBytes), observer));
     }
 }
