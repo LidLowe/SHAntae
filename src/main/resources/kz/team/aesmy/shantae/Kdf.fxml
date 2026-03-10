@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="480.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.team.aesmy.shantae.Controller.KdfController">
+  <children>
+
+    <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#onExport" text="Export output" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" VBox.vgrow="ALWAYS">
+      <children>
+
+        <!-- Mode selector -->
+        <Label layoutX="18.0" layoutY="8.0" text="Mode">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <ChoiceBox fx:id="modeChoice" layoutX="18.0" layoutY="24.0" onAction="#onModeChange" prefHeight="28.0" prefWidth="150.0" />
+
+        <!-- Input (password / IKM) -->
+        <Label layoutX="18.0" layoutY="66.0" text="Password">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <TextArea fx:id="inputArea" layoutX="18.0" layoutY="82.0" prefHeight="60.0" prefWidth="460.0" promptText="Password (PBKDF2) or Input Key Material (HKDF)" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </TextArea>
+
+        <!-- Salt -->
+        <Label layoutX="18.0" layoutY="156.0" text="Salt">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <TextArea fx:id="saltArea" layoutX="18.0" layoutY="172.0" prefHeight="40.0" prefWidth="400.0" promptText="Salt" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </TextArea>
+        <Button layoutX="430.0" layoutY="172.0" mnemonicParsing="false" onAction="#onRandomSalt" prefHeight="25.0" prefWidth="100.0" text="Random">
+          <font><Font name="Fira Code Regular" size="13.0" /></font>
+        </Button>
+
+        <!-- Info (HKDF only) -->
+        <Label fx:id="infoLabel" layoutX="18.0" layoutY="226.0" text="Info (HKDF)" visible="false">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <TextArea fx:id="infoArea" layoutX="18.0" layoutY="242.0" prefHeight="40.0" prefWidth="460.0" promptText="Context / application info" visible="false" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </TextArea>
+
+        <!-- Iterations (PBKDF2 only) -->
+        <Label fx:id="iterLabel" layoutX="490.0" layoutY="44.0" text="Iterations">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <Spinner fx:id="iterationsSpinner" editable="true" layoutX="490.0" layoutY="61.0" prefHeight="28.0" prefWidth="130.0" />
+
+        <!-- Key length -->
+        <Label layoutX="489.0" layoutY="95.0" text="Key Length (bytes)">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <Spinner fx:id="keyLenSpinner" editable="true" layoutX="490.0" layoutY="114.0" prefHeight="28.0" prefWidth="130.0" />
+
+        <!-- Output -->
+        <Label layoutX="18.0" layoutY="298.0" text="Output">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </Label>
+        <TextArea fx:id="outputArea" editable="false" layoutX="18.0" layoutY="314.0" prefHeight="60.0" prefWidth="460.0" promptText="Output" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0" /></font>
+        </TextArea>
+        <Button layoutX="490.0" layoutY="314.0" mnemonicParsing="false" onAction="#onCopy" prefHeight="25.0" prefWidth="130.0" text="Copy">
+          <font><Font name="Fira Code Regular" size="13.0" /></font>
+        </Button>
+
+        <!-- Action buttons -->
+        <Button layoutX="230.0" layoutY="400.0" mnemonicParsing="false" onAction="#onDerive" prefHeight="25.0" prefWidth="110.0" text="Derive Key">
+          <font><Font name="Fira Code Regular" size="13.0" /></font>
+        </Button>
+        <Button layoutX="360.0" layoutY="400.0" mnemonicParsing="false" onAction="#onClear" prefHeight="25.0" prefWidth="85.0" text="Clear">
+          <font><Font name="Fira Code Regular" size="13.0" /></font>
+        </Button>
+
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

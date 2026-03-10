@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>kz.team.aesmy.shantae/kz.team.aesmy.shantae.HelloApplication</mainClass>
+                            <mainClass>kz.team.aesmy.shantae/kz.team.aesmy.shantae.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

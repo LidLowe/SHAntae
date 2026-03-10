@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="560.0" prefWidth="660.0"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="kz.team.aesmy.shantae.Controller.HashController">
+  <children>
+
+    <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Import input"  onAction="#onImport"/>
+            <MenuItem mnemonicParsing="false" text="Export output" onAction="#onExport"/>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-1.0"
+                minHeight="-Infinity" minWidth="-Infinity"
+                prefHeight="530.0" prefWidth="660.0" VBox.vgrow="ALWAYS">
+      <children>
+
+        <!-- Input -->
+        <Label layoutX="18.0" layoutY="6.0" text="Input">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </Label>
+        <TextArea fx:id="inputArea"
+                  layoutX="18.0" layoutY="22.0"
+                  prefHeight="100.0" prefWidth="460.0"
+                  promptText="Text to hash" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </TextArea>
+        <Button layoutX="490.0" layoutY="22.0"
+                prefHeight="25.0" prefWidth="130.0"
+                text="Browse File" mnemonicParsing="false"
+                onAction="#onBrowseFile">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+
+        <!-- SHA-256 Output -->
+        <Label layoutX="18.0" layoutY="134.0" text="SHA-256">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </Label>
+        <TextArea fx:id="outputArea256"
+                  layoutX="18.0" layoutY="150.0"
+                  prefHeight="40.0" prefWidth="460.0"
+                  promptText="SHA-256 result" wrapText="true" editable="false">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </TextArea>
+        <Button layoutX="490.0" layoutY="150.0"
+                prefHeight="25.0" prefWidth="130.0"
+                text="Copy SHA-256" mnemonicParsing="false"
+                onAction="#onCopy256">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+
+        <!-- SHA-512 Output -->
+        <Label layoutX="18.0" layoutY="202.0" text="SHA-512">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </Label>
+        <TextArea fx:id="outputArea512"
+                  layoutX="18.0" layoutY="218.0"
+                  prefHeight="40.0" prefWidth="460.0"
+                  promptText="SHA-512 result" wrapText="true" editable="false">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </TextArea>
+        <Button layoutX="490.0" layoutY="218.0"
+                prefHeight="25.0" prefWidth="130.0"
+                text="Copy SHA-512" mnemonicParsing="false"
+                onAction="#onCopy512">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+
+        <!-- Compare -->
+        <Label layoutX="18.0" layoutY="270.0" text="Compare Hash">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </Label>
+        <TextArea fx:id="compareArea"
+                  layoutX="18.0" layoutY="286.0"
+                  prefHeight="40.0" prefWidth="460.0"
+                  promptText="Paste SHA-256 or SHA-512 hash to compare" wrapText="true">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </TextArea>
+        <Button layoutX="490.0" layoutY="286.0"
+                prefHeight="25.0" prefWidth="130.0"
+                text="Compare" mnemonicParsing="false"
+                onAction="#onCompare">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+        <Label fx:id="compareResultLabel" layoutX="490.0" layoutY="318.0" text="">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </Label>
+
+        <!-- Educational mode toggle -->
+        <CheckBox fx:id="educationalBox"
+                  layoutX="18.0" layoutY="344.0"
+                  text="Educational mode (show SHA-256 round values)"
+                  mnemonicParsing="false"
+                  onAction="#onEducationalToggle">
+          <font><Font name="Fira Code Regular" size="12.0"/></font>
+        </CheckBox>
+
+        <!-- Educational output -->
+        <TextArea fx:id="eduArea"
+                  layoutX="18.0" layoutY="368.0"
+                  prefHeight="100.0" prefWidth="624.0"
+                  promptText="Round-by-round a, b, c, d, e, f, g, h will appear here"
+                  wrapText="true" editable="false" visible="false">
+          <font><Font name="Fira Code Regular" size="11.0"/></font>
+        </TextArea>
+
+        <!-- Action buttons -->
+        <Button layoutX="200.0" layoutY="400.0"
+                prefHeight="25.0" prefWidth="85.0"
+                text="Hash" mnemonicParsing="false"
+                onAction="#onHash">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+        <Button layoutX="300.0" layoutY="400.0"
+                prefHeight="25.0" prefWidth="85.0"
+                text="Clear" mnemonicParsing="false"
+                onAction="#onClear">
+          <font><Font name="Fira Code Regular" size="13.0"/></font>
+        </Button>
+
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

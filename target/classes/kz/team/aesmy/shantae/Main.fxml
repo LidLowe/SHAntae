@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="530.0" prefWidth="680.0"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+      <tabs>
+
+        <Tab text="Hash">
+          <content><fx:include source="Hash.fxml"/></content>
+        </Tab>
+
+        <Tab text="HMAC">
+          <content><fx:include source="Hmac.fxml"/></content>
+        </Tab>
+
+        <Tab text="Passwords">
+          <content><fx:include source="Password.fxml"/></content>
+        </Tab>
+
+        <Tab text="KDF">
+          <content><fx:include source="Kdf.fxml"/></content>
+        </Tab>
+
+        <Tab text="Tests">
+          <content><fx:include source="Tests.fxml"/></content>
+        </Tab>
+
+      </tabs>
+    </TabPane>
+
+  </children>
+</VBox>
