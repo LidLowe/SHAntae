@@ -80,7 +80,7 @@ public class HashController
     private void onHash()
     {
         String text = inputArea.getText();
-        if (text.isEmpty()) { showError("Input is empty."); return; }
+       // if (text.isEmpty()) { showError("Input is empty."); return; }
 
         byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 

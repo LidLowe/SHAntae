@@ -27,7 +27,7 @@ public class PBKDF2
     public static byte[] hashBytes(byte[] password, byte[] salt, int iterations, int dkLenBytes)
     {
         int blockCount = (dkLenBytes + HASH_LEN - 1) / HASH_LEN;
-        byte[] dk      = new byte[blockCount * HASH_LEN];
+        byte[] dk = new byte[blockCount * HASH_LEN];
 
         for (int i = 1; i <= blockCount; i++)
         {
@@ -39,6 +39,7 @@ public class PBKDF2
         {
             byte[] trimmed = new byte[dkLenBytes];
             System.arraycopy(dk, 0, trimmed, 0, dkLenBytes);
+
             return trimmed;
         }
 

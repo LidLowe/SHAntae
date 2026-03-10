@@ -60,12 +60,25 @@ public class SHA512
             {
                 long t1 = hVal + bigSigma1(e) + ch(e, f, g) + K[t] + w[t];
                 long t2 = bigSigma0(a) + maj(a, b, c);
-                hVal = g; g = f; f = e; e = d + t1;
-                d = c;    c = b; b = a; a = t1 + t2;
+
+                hVal = g;
+                g = f;
+                f = e;
+                e = d + t1;
+                d = c;
+                c = b;
+                b = a;
+                a = t1 + t2;
             }
 
-            h[0] += a; h[1] += b; h[2] += c; h[3] += d;
-            h[4] += e; h[5] += f; h[6] += g; h[7] += hVal;
+            h[0] += a;
+            h[1] += b;
+            h[2] += c;
+            h[3] += d;
+            h[4] += e;
+            h[5] += f;
+            h[6] += g;
+            h[7] += hVal;
         }
 
         return h;
